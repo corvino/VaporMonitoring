@@ -39,7 +39,8 @@ extension MetricsMiddleware: Middleware {
         let topLevel = String(request.http.url.path.split(separator: "/").first ?? "/")
         var counterDimensions = [
             ("method", request.http.method.string),
-            ("path", topLevel)]
+            ("path", topLevel),
+            ("status_code", "\(statusCode ?? 0)")]
         if let statusCode = statusCode {
             counterDimensions.append(("status_code", "\(statusCode)"))
         }
